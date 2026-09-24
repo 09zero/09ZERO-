@@ -1,474 +1,380 @@
 /* =========================================================
    09ZERO - CONNECT.JS
-   FORM INTERACTION
-   SERVICE SELECTION
-   BUDGET SELECTION
-   VALIDATION
-========================================================= */
+   Form interaction • Service/Budget selection • Validation
+   ========================================================= */
 
 "use strict";
 
+document.addEventListener("DOMContentLoaded", () => {
+    const connectForm = document.getElementById("connectForm");
+    const connectSubmit = document.getElementById("connectSubmit");
+    const connectStatus = document.getElementById("connectFormStatus");
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const connectForm =
-    document.getElementById("connectForm");
-
-const connectSubmit =
-    document.getElementById("connectSubmit");
-
-const connectStatus =
-    document.getElementById("connectFormStatus");
-
-const serviceOptions =
-    document.querySelectorAll(
+    const serviceOptions = document.querySelectorAll(
         ".connect-service-option"
     );
 
-const budgetOptions =
-    document.querySelectorAll(
+    const budgetOptions = document.querySelectorAll(
         ".connect-budget-option"
     );
 
-const serviceInput =
-    document.getElementById("service");
+    const serviceInput = document.getElementById("service");
+    const budgetInput = document.getElementById("budget");
 
-const budgetInput =
-    document.getElementById("budget");
+    /* =========================================================
+       SERVICE SELECTION
+       ========================================================= */
 
+    serviceOptions.forEach((button) => {
+        button.addEventListener("click", () => {
+            serviceOptions.forEach((item) => {
+                item.classList.remove("active");
+            });
 
-/* =========================================================
-   SERVICE SELECTION
-========================================================= */
-
-serviceOptions.forEach(function (button) {
-
-    button.addEventListener(
-        "click",
-        function () {
-
-            serviceOptions.forEach(
-                function (item) {
-                    item.classList.remove("active");
-                }
-            );
-
-            this.classList.add("active");
+            button.classList.add("active");
 
             if (serviceInput) {
-                serviceInput.value =
-                    this.dataset.service || "";
+                serviceInput.value = button.dataset.service || "";
             }
 
             clearFieldError("service");
-        }
-    );
+        });
+    });
 
-});
+    /* =========================================================
+       BUDGET SELECTION
+       ========================================================= */
 
+    budgetOptions.forEach((button) => {
+        button.addEventListener("click", () => {
+            budgetOptions.forEach((item) => {
+                item.classList.remove("active");
+            });
 
-/* =========================================================
-   BUDGET SELECTION
-========================================================= */
-
-budgetOptions.forEach(function (button) {
-
-    button.addEventListener(
-        "click",
-        function () {
-
-            budgetOptions.forEach(
-                function (item) {
-                    item.classList.remove("active");
-                }
-            );
-
-            this.classList.add("active");
+            button.classList.add("active");
 
             if (budgetInput) {
-                budgetInput.value =
-                    this.dataset.budget || "";
+                budgetInput.value = button.dataset.budget || "";
             }
 
-        }
-    );
+            clearFieldError("budget");
+        });
+    });
 
-});
+    /* =========================================================
+       FIELD ERROR HELPERS
+       ========================================================= */
 
+    function showFieldError(fieldName, message) {
+        const field = document.getElementById(fieldName);
 
-/* =========================================================
-   FIELD ERROR
-========================================================= */
-
-function showFieldError(
-    fieldName,
-    message
-) {
-
-    const field =
-        document.getElementById(fieldName);
-
-    const error =
-        document.querySelector(
+        const error = document.querySelector(
             `[data-error-for="${fieldName}"]`
         );
 
-    if (field) {
+        if (field) {
+            const parent = field.closest(".connect-field");
 
-        const parent =
-            field.closest(".connect-field");
+            if (parent) {
+                parent.classList.add("has-error");
+            }
 
-        if (parent) {
-            parent.classList.add("has-error");
+            field.setAttribute("aria-invalid", "true");
         }
 
+        if (error) {
+            error.textContent = message;
+        }
     }
 
-    if (error) {
-        error.textContent = message;
-    }
+    function clearFieldError(fieldName) {
+        const field = document.getElementById(fieldName);
 
-}
-
-
-function clearFieldError(fieldName) {
-
-    const field =
-        document.getElementById(fieldName);
-
-    const error =
-        document.querySelector(
+        const error = document.querySelector(
             `[data-error-for="${fieldName}"]`
         );
 
-    if (field) {
+        if (field) {
+            const parent = field.closest(".connect-field");
 
-        const parent =
-            field.closest(".connect-field");
+            if (parent) {
+                parent.classList.remove("has-error");
+            }
 
-        if (parent) {
-            parent.classList.remove("has-error");
+            field.removeAttribute("aria-invalid");
         }
 
+        if (error) {
+            error.textContent = "";
+        }
     }
 
-    if (error) {
-        error.textContent = "";
+    /* =========================================================
+       EMAIL VALIDATION
+       ========================================================= */
+
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-}
+    /* =========================================================
+       FORM VALIDATION
+       ========================================================= */
 
+    function validateConnectForm() {
+        let isValid = true;
 
-/* =========================================================
-   EMAIL VALIDATION
-========================================================= */
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const message = document.getElementById("message");
 
-function isValidEmail(email) {
+        /* NAME */
 
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        .test(email);
+        if (!name || !name.value.trim()) {
+            showFieldError(
+                "name",
+                "Please enter your name."
+            );
 
-}
+            isValid = false;
+        } else {
+            clearFieldError("name");
+        }
 
+        /* EMAIL */
 
-/* =========================================================
-   FORM VALIDATION
-========================================================= */
+        if (!email || !email.value.trim()) {
+            showFieldError(
+                "email",
+                "Please enter your email."
+            );
 
-function validateConnectForm() {
+            isValid = false;
 
-    let isValid = true;
+        } else if (!isValidEmail(email.value.trim())) {
+            showFieldError(
+                "email",
+                "Please enter a valid email."
+            );
 
-    const name =
-        document.getElementById("name");
+            isValid = false;
 
-    const email =
-        document.getElementById("email");
+        } else {
+            clearFieldError("email");
+        }
 
-    const message =
-        document.getElementById("message");
+        /* SERVICE */
 
+        if (
+            serviceInput &&
+            !serviceInput.value.trim()
+        ) {
+            showFieldError(
+                "service",
+                "Please select a service."
+            );
 
-    /* NAME */
+            isValid = false;
 
-    if (!name || !name.value.trim()) {
+        } else {
+            clearFieldError("service");
+        }
 
-        showFieldError(
-            "name",
-            "Please enter your name."
-        );
+        /* MESSAGE */
 
-        isValid = false;
+        if (
+            !message ||
+            !message.value.trim()
+        ) {
+            showFieldError(
+                "message",
+                "Please tell us about your project."
+            );
 
-    } else {
+            isValid = false;
 
-        clearFieldError("name");
+        } else {
+            clearFieldError("message");
+        }
 
+        return isValid;
     }
 
+    /* =========================================================
+       STATUS
+       ========================================================= */
 
-    /* EMAIL */
-
-    if (!email || !email.value.trim()) {
-
-        showFieldError(
-            "email",
-            "Please enter your email."
-        );
-
-        isValid = false;
-
-    } else if (
-        !isValidEmail(
-            email.value.trim()
-        )
+    function setConnectStatus(
+        message,
+        type = ""
     ) {
+        if (!connectStatus) {
+            return;
+        }
 
-        showFieldError(
-            "email",
-            "Please enter a valid email."
+        connectStatus.textContent = message;
+
+        connectStatus.className =
+            "connect-form-status";
+
+        if (type) {
+            connectStatus.classList.add(type);
+        }
+
+        connectStatus.setAttribute(
+            "role",
+            "status"
         );
 
-        isValid = false;
-
-    } else {
-
-        clearFieldError("email");
-
-    }
-
-
-    /* SERVICE */
-
-    if (
-        serviceInput &&
-        !serviceInput.value.trim()
-    ) {
-
-        showFieldError(
-            "service",
-            "Please select a service."
+        connectStatus.setAttribute(
+            "aria-live",
+            "polite"
         );
-
-        isValid = false;
-
-    } else {
-
-        clearFieldError("service");
-
     }
 
+    /* =========================================================
+       FORM SUBMIT
+       ========================================================= */
 
-    /* MESSAGE */
+    if (connectForm) {
 
-    if (
-        !message ||
-        !message.value.trim()
-    ) {
+        connectForm.addEventListener(
+            "submit",
+            async (event) => {
 
-        showFieldError(
-            "message",
-            "Please tell us about your project."
-        );
+                event.preventDefault();
 
-        isValid = false;
+                setConnectStatus("");
 
-    } else {
+                /* VALIDATION */
 
-        clearFieldError("message");
+                if (!validateConnectForm()) {
 
-    }
+                    setConnectStatus(
+                        "Please complete the required fields.",
+                        "error"
+                    );
 
+                    const firstError =
+                        document.querySelector(
+                            ".has-error input, .has-error textarea"
+                        );
 
-    return isValid;
+                    if (firstError) {
+                        firstError.focus();
+                    }
 
-}
+                    return;
+                }
 
+                /* BUTTON LOADING */
 
-/* =========================================================
-   STATUS
-========================================================= */
+                const originalButtonHTML =
+                    connectSubmit
+                        ? connectSubmit.innerHTML
+                        : "";
 
-function setConnectStatus(
-    message,
-    type
-) {
+                if (connectSubmit) {
 
-    if (!connectStatus) {
-        return;
-    }
+                    connectSubmit.disabled = true;
 
-    connectStatus.textContent =
-        message;
+                    connectSubmit.setAttribute(
+                        "aria-busy",
+                        "true"
+                    );
 
-    connectStatus.className =
-        "connect-form-status";
+                    connectSubmit.innerHTML = `
+                        <span>Sending...</span>
+                        <span class="connect-submit-arrow">
+                            ...
+                        </span>
+                    `;
+                }
 
-    if (type) {
-        connectStatus.classList.add(type);
-    }
+                /*
+                 * IMPORTANT
+                 *
+                 * No fake success message is shown.
+                 *
+                 * The original JavaScript only waited for
+                 * 700ms and then displayed a success message,
+                 * but no enquiry was actually sent anywhere.
+                 *
+                 * Connect this section to your real backend
+                 * / Supabase API before production launch.
+                 */
 
-}
-
-
-/* =========================================================
-   FORM SUBMIT
-========================================================= */
-
-if (connectForm) {
-
-    connectForm.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            setConnectStatus("", "");
-
-
-            /* VALIDATION */
-
-            if (!validateConnectForm()) {
+                await new Promise(
+                    (resolve) => {
+                        setTimeout(resolve, 250);
+                    }
+                );
 
                 setConnectStatus(
-                    "Please complete the required fields.",
+                    "Your form is validated, but the enquiry service is not connected yet.",
                     "error"
                 );
 
-                const firstError =
-                    document.querySelector(
-                        ".has-error input, .has-error textarea"
+                /* RESTORE BUTTON */
+
+                if (connectSubmit) {
+
+                    connectSubmit.disabled = false;
+
+                    connectSubmit.removeAttribute(
+                        "aria-busy"
                     );
 
-                if (firstError) {
-                    firstError.focus();
+                    connectSubmit.innerHTML =
+                        originalButtonHTML;
                 }
-
-                return;
-
             }
-
-
-            /* BUTTON LOADING */
-
-            const originalButtonHTML =
-                connectSubmit
-                    ? connectSubmit.innerHTML
-                    : "";
-
-            if (connectSubmit) {
-
-                connectSubmit.disabled =
-                    true;
-
-                connectSubmit.innerHTML =
-                    `
-                    <span>Sending...</span>
-                    <span class="connect-submit-arrow">...</span>
-                    `;
-
-            }
-
-
-            /*
-               ------------------------------------------------
-               TEMPORARY FRONTEND SUCCESS
-               ------------------------------------------------
-
-               Supabase connection will be added here.
-
-               Do NOT add fake lead storage.
-            */
-
-            await new Promise(
-                function (resolve) {
-                    setTimeout(
-                        resolve,
-                        700
-                    );
-                }
-            );
-
-
-            setConnectStatus(
-                "Your enquiry form is ready. Supabase submission will be connected next.",
-                "success"
-            );
-
-
-            if (connectSubmit) {
-
-                connectSubmit.disabled =
-                    false;
-
-                connectSubmit.innerHTML =
-                    originalButtonHTML;
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   LIVE FIELD ERROR CLEAR
-========================================================= */
-
-const connectInputs =
-    document.querySelectorAll(
-        ".connect-field input, .connect-field textarea"
-    );
-
-connectInputs.forEach(function (input) {
-
-    input.addEventListener(
-        "input",
-        function () {
-
-            clearFieldError(
-                this.id
-            );
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   ESCAPE STATUS
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape" &&
-            connectStatus
-        ) {
-
-            setConnectStatus(
-                "",
-                ""
-            );
-
-        }
-
+        );
     }
-);
 
+    /* =========================================================
+       LIVE FIELD ERROR CLEAR
+       ========================================================= */
 
-/* =========================================================
-   CONSOLE
-========================================================= */
+    const connectInputs =
+        document.querySelectorAll(
+            ".connect-field input, .connect-field textarea"
+        );
 
-console.log(
-    "09ZERO - Connect Page JS Loaded"
-);
+    connectInputs.forEach((input) => {
 
+        input.addEventListener(
+            "input",
+            () => {
+                clearFieldError(input.id);
+            }
+        );
+
+    });
+
+    /* =========================================================
+       ESCAPE STATUS
+       ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Escape" &&
+                connectStatus
+            ) {
+                setConnectStatus("");
+            }
+
+        }
+    );
+
+    /* =========================================================
+       CONSOLE
+       ========================================================= */
+
+    console.log(
+        "09ZERO - Connect Page JS Loaded"
+    );
+});
