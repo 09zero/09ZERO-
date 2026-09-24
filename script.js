@@ -1,26 +1,30 @@
 /* =========================================================
-   09ZERO - SCRIPT.JS
-   NAVBAR + HERO
+09ZERO - SCRIPT.JS
+NAVBAR + HERO
 ========================================================= */
 
 "use strict";
 
-
 /* =========================================================
-   NAVBAR
+NAVBAR
 ========================================================= */
 
-const menuToggle = document.getElementById("menuToggle");
-const navbarMenu = document.getElementById("navbarMenu");
+const menuToggle =
+document.getElementById("menuToggle");
 
+const navbarMenu =
+document.getElementById("navbarMenu");
 
 if (menuToggle && navbarMenu) {
 
-    /* -----------------------------------------------------
-       OPEN / CLOSE MOBILE MENU
-    ----------------------------------------------------- */
 
-    menuToggle.addEventListener("click", function () {
+/* =====================================================
+   OPEN / CLOSE MOBILE MENU
+===================================================== */
+
+menuToggle.addEventListener(
+    "click",
+    function () {
 
         const isOpen =
             navbarMenu.classList.toggle("active");
@@ -32,7 +36,7 @@ if (menuToggle && navbarMenu) {
 
         menuToggle.setAttribute(
             "aria-expanded",
-            isOpen
+            String(isOpen)
         );
 
         menuToggle.setAttribute(
@@ -41,85 +45,137 @@ if (menuToggle && navbarMenu) {
                 ? "Close navigation menu"
                 : "Open navigation menu"
         );
-    });
+
+    }
+);
 
 
-    /* -----------------------------------------------------
-       CLOSE MENU AFTER CLICKING NAV LINK
-    ----------------------------------------------------- */
+/* =====================================================
+   CLOSE MENU AFTER NAV LINK CLICK
+===================================================== */
 
-    const navLinks =
-        navbarMenu.querySelectorAll("a");
-
-
-    navLinks.forEach(function (link) {
-
-        link.addEventListener("click", function () {
-
-            navbarMenu.classList.remove("active");
-
-            menuToggle.classList.remove("active");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            menuToggle.setAttribute(
-                "aria-label",
-                "Open navigation menu"
-            );
-        });
-
-    });
+const navLinks =
+    navbarMenu.querySelectorAll("a");
 
 
-    /* -----------------------------------------------------
-       CLOSE MENU WITH ESCAPE
-    ----------------------------------------------------- */
+navLinks.forEach(
+    function (link) {
 
-    document.addEventListener(
-        "keydown",
-        function (event) {
+        link.addEventListener(
+            "click",
+            function () {
 
-            if (event.key === "Escape") {
+                closeMobileMenu();
 
-                navbarMenu.classList.remove(
-                    "active"
-                );
-
-                menuToggle.classList.remove(
-                    "active"
-                );
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
             }
+        );
 
-        }
+    }
+);
+
+
+/* =====================================================
+   CLOSE MENU FUNCTION
+===================================================== */
+
+function closeMobileMenu() {
+
+    navbarMenu.classList.remove("active");
+
+    menuToggle.classList.remove("active");
+
+    menuToggle.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+    menuToggle.setAttribute(
+        "aria-label",
+        "Open navigation menu"
     );
 
 }
 
 
+/* =====================================================
+   ESCAPE KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (event.key === "Escape") {
+
+            closeMobileMenu();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CLICK OUTSIDE MENU
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const clickedInsideMenu =
+            navbarMenu.contains(event.target);
+
+        const clickedToggle =
+            menuToggle.contains(event.target);
+
+
+        if (
+            !clickedInsideMenu &&
+            !clickedToggle &&
+            navbarMenu.classList.contains("active")
+        ) {
+
+            closeMobileMenu();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   RESET MENU WHEN MOVING TO DESKTOP
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    function () {
+
+        if (window.innerWidth > 768) {
+
+            closeMobileMenu();
+
+        }
+
+    }
+);
+
+
+}
+
 /* =========================================================
-   HERO - SMOOTH SCROLL
+SMOOTH SCROLL
 ========================================================= */
 
 const smoothScrollLinks =
-    document.querySelectorAll(
-        'a[href^="#"]'
-    );
+document.querySelectorAll(
+'a[href^="#"]'
+);
 
+smoothScrollLinks.forEach(
+function (link) {
 
-smoothScrollLinks.forEach(function (link) {
 
     link.addEventListener(
         "click",
@@ -128,11 +184,14 @@ smoothScrollLinks.forEach(function (link) {
             const targetId =
                 this.getAttribute("href");
 
+
             if (
                 !targetId ||
                 targetId === "#"
             ) {
+
                 return;
+
             }
 
 
@@ -141,7 +200,9 @@ smoothScrollLinks.forEach(function (link) {
 
 
             if (!target) {
+
                 return;
+
             }
 
 
@@ -156,99 +217,138 @@ smoothScrollLinks.forEach(function (link) {
         }
     );
 
-});
+}
 
+
+);
 
 /* =========================================================
-   HERO - PARALLAX EFFECT
+HERO - PARALLAX EFFECT
 ========================================================= */
 
 const heroVisual =
-    document.querySelector(".hero-visual");
-
+document.querySelector(".hero-visual");
 
 if (heroVisual) {
 
-    let heroAnimationFrame = null;
+
+let heroAnimationFrame = null;
 
 
-    window.addEventListener(
-        "mousemove",
-        function (event) {
+window.addEventListener(
+    "mousemove",
+    function (event) {
 
-            if (window.innerWidth <= 950) {
-                return;
-            }
+        /* Disable on tablet and mobile */
 
+        if (window.innerWidth <= 950) {
 
-            if (heroAnimationFrame) {
-                cancelAnimationFrame(
-                    heroAnimationFrame
-                );
-            }
-
-
-            heroAnimationFrame =
-                requestAnimationFrame(
-                    function () {
-
-                        const x =
-                            (event.clientX /
-                                window.innerWidth) -
-                            0.5;
-
-                        const y =
-                            (event.clientY /
-                                window.innerHeight) -
-                            0.5;
-
-
-                        heroVisual.style.transform =
-                            `translate3d(${x * 8}px, ${y * 8}px, 0)`;
-                    }
-                );
+            return;
 
         }
-    );
 
 
-    window.addEventListener(
-        "mouseleave",
-        function () {
+        if (heroAnimationFrame) {
+
+            cancelAnimationFrame(
+                heroAnimationFrame
+            );
+
+        }
+
+
+        heroAnimationFrame =
+            requestAnimationFrame(
+                function () {
+
+                    const x =
+                        (event.clientX /
+                            window.innerWidth) -
+                        0.5;
+
+
+                    const y =
+                        (event.clientY /
+                            window.innerHeight) -
+                        0.5;
+
+
+                    heroVisual.style.transform =
+                        `translate3d(${x * 8}px, ${y * 8}px, 0)`;
+
+                }
+            );
+
+    }
+);
+
+
+/* =====================================================
+   RESET HERO POSITION
+===================================================== */
+
+window.addEventListener(
+    "mouseleave",
+    function () {
+
+        heroVisual.style.transform =
+            "translate3d(0, 0, 0)";
+
+    }
+);
+
+
+/* =====================================================
+   RESET ON MOBILE
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    function () {
+
+        if (window.innerWidth <= 950) {
 
             heroVisual.style.transform =
                 "translate3d(0, 0, 0)";
+
         }
-    );
+
+    }
+);
+
 
 }
 
-
 /* =========================================================
-   HERO - REDUCED MOTION
+REDUCED MOTION
 ========================================================= */
 
 const reducedMotion =
-    window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    );
+window.matchMedia(
+"(prefers-reduced-motion: reduce)"
+);
+
+if (
+reducedMotion.matches &&
+heroVisual
+) {
 
 
-if (reducedMotion.matches && heroVisual) {
+heroVisual.style.transform =
+    "none";
 
-    heroVisual.style.transform =
-        "none";
 
 }
 
-
 /* =========================================================
-   09ZERO SCRIPT LOADED
+09ZERO SCRIPT LOADED
 ========================================================= */
 
 console.log(
-    "09ZERO - Navbar + Hero JS Loaded"
+"09ZERO - Navbar + Hero JS Loaded"
 );
+
+
 
 
 
