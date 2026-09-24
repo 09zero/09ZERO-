@@ -1,665 +1,959 @@
 /* =========================================================
-   09ZERO - NAVBAR
-   FINAL PREMIUM RESPONSIVE VERSION
+09ZERO - NAVBAR
+FULL RESPONSIVE VERSION
+
+Mobile
+Tablet
+Laptop
+Desktop
+Large Monitor
+========================================================= */
+
+/* =========================================================
+GLOBAL BOX SIZING
+========================================================= */
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+}
+
+/* =========================================================
+SITE HEADER
 ========================================================= */
 
 .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+position: sticky;
+top: 0;
+z-index: 1000;
 
-    width: 100%;
 
-    background: rgba(5, 5, 5, 0.90);
+width: 100%;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+background: rgba(5, 5, 5, 0.94);
 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+
+
 }
 
-
 /* =========================================================
-   NAVBAR CONTAINER
+NAVBAR CONTAINER
 ========================================================= */
 
 .navbar {
-    width: min(1380px, calc(100% - 80px));
+width: min(1380px, calc(100% - 80px));
 
-    min-height: 86px;
 
-    margin: 0 auto;
+min-height: 86px;
 
-    display: flex;
+margin: 0 auto;
 
-    align-items: center;
+display: flex;
 
-    justify-content: space-between;
+align-items: center;
+justify-content: space-between;
 
-    gap: 40px;
+gap: 40px;
+
+
 }
 
-
 /* =========================================================
-   LOGO
+LOGO
 ========================================================= */
-/* 
+
 .navbar-logo {
-    display: inline-flex;
+display: inline-flex;
 
-    align-items: center;
 
-    flex-shrink: 0;
+align-items: center;
 
-    color: #ffffff;
+flex-shrink: 0;
 
-    text-decoration: none;
+color: #ffffff;
 
-    font-size: 30px;
+text-decoration: none;
 
-    font-weight: 900;
+font-size: 30px;
 
-    line-height: 1;
+font-weight: 900;
 
-    letter-spacing: -2px;
+line-height: 1;
 
-    white-space: nowrap;
+letter-spacing: -2px;
 
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+white-space: nowrap;
+
+transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+
+
 }
 
 .navbar-logo span {
-    font-weight: 400;
+font-weight: 400;
 }
 
 .navbar-logo:hover {
-    opacity: 0.75;
-
-    transform: translateY(-1px);
-} */
+opacity: 0.75;
 
 
-/* =========================================================
-   09ZERO NAVBAR LOGO IMAGE
-========================================================= */
+transform:
+    translateY(-1px);
 
-/* =========================================================
-   09ZERO - ROUND LOGO
-========================================================= */
-
-.navbar-logo {
-    width: 58px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    overflow: hidden;
-
-    background: #ffffff;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-
-    flex-shrink: 0;
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.navbar-logo img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.navbar-logo:hover {
-    transform: scale(1.06);
-    box-shadow:
-        0 0 0 5px rgba(22, 119, 255, 0.12),
-        0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 950px) {
-
-    .navbar-logo {
-        width: 50px;
-        height: 50px;
-    }
 
 }
 
-
 /* =========================================================
-   NAVIGATION MENU
+NAVIGATION MENU
 ========================================================= */
 
 .navbar-menu {
-    display: flex;
+display: flex;
 
-    align-items: center;
 
-    justify-content: flex-end;
+align-items: center;
 
-    gap: 34px;
+justify-content: flex-end;
+
+gap: 32px;
+
+min-width: 0;
+
+
 }
 
-
 /* =========================================================
-   NAV LINKS
+NAV LINKS
 ========================================================= */
 
 .nav-link {
-    position: relative;
+position: relative;
 
-    display: inline-flex;
 
-    align-items: center;
+display: inline-flex;
 
-    padding: 10px 0;
+align-items: center;
 
-    color: #c7c7cc;
+padding: 10px 0;
 
-    text-decoration: none;
+color: #c7c7cc;
 
-    font-size: 15px;
+text-decoration: none;
 
-    font-weight: 600;
+font-size: 15px;
 
-    line-height: 1;
+font-weight: 600;
 
-    transition:
-        color 0.25s ease,
-        transform 0.25s ease;
+line-height: 1;
+
+white-space: nowrap;
+
+transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+
+
 }
 
 .nav-link:hover {
-    color: #ffffff;
+color: #ffffff;
 
-    transform: translateY(-1px);
+
+transform:
+    translateY(-1px);
+
+
 }
 
-
-/* UNDERLINE */
+/* =========================================================
+NAV LINK UNDERLINE
+========================================================= */
 
 .nav-link::after {
-    content: "";
+content: "";
 
-    position: absolute;
 
-    left: 0;
-    bottom: 3px;
+position: absolute;
 
-    width: 0;
-    height: 1px;
+left: 0;
 
-    background: #ffffff;
+bottom: 3px;
 
-    transition: width 0.25s ease;
+width: 0;
+
+height: 1px;
+
+background: #ffffff;
+
+transition:
+    width 0.25s ease;
+
+
 }
 
 .nav-link:hover::after {
-    width: 100%;
+width: 100%;
 }
 
-
 /* =========================================================
-   NAV CTA
+NAV CTA
 ========================================================= */
 
 .nav-cta {
-    display: inline-flex;
+display: inline-flex;
 
-    align-items: center;
 
-    justify-content: center;
+align-items: center;
 
-    gap: 12px;
+justify-content: center;
 
-    min-height: 50px;
+flex-shrink: 0;
 
-    padding: 0 23px;
+gap: 10px;
 
-    border-radius: 999px;
+min-height: 50px;
 
-    background: #ffffff;
+padding:
+    0 22px;
 
-    color: #050505;
+border-radius: 999px;
 
-    text-decoration: none;
+background: #ffffff;
 
-    font-size: 14px;
+color: #050505;
 
-    font-weight: 700;
+text-decoration: none;
 
-    white-space: nowrap;
+font-size: 14px;
 
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        box-shadow 0.3s ease;
+font-weight: 700;
+
+line-height: 1;
+
+white-space: nowrap;
+
+transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+
+
 }
 
-.nav-cta span {
-    font-size: 19px;
+.nav-cta-text {
+display: block;
 
-    line-height: 1;
 
-    transition: transform 0.3s ease;
+white-space: nowrap;
+
+
+}
+
+.nav-cta-arrow {
+display: inline-flex;
+
+
+align-items: center;
+
+justify-content: center;
+
+flex-shrink: 0;
+
+font-size: 18px;
+
+line-height: 1;
+
+transition:
+    transform 0.3s ease;
+
+
 }
 
 .nav-cta:hover {
-    background: #e4e4e7;
+background: #e4e4e7;
 
-    transform: translateY(-3px);
 
-    box-shadow:
-        0 12px 35px rgba(255, 255, 255, 0.13);
+transform:
+    translateY(-3px);
+
+box-shadow:
+    0 12px 35px rgba(255, 255, 255, 0.13);
+
+
 }
 
-.nav-cta:hover span {
-    transform: translateX(5px);
+.nav-cta:hover .nav-cta-arrow {
+transform:
+translateX(5px);
 }
-
 
 /* =========================================================
-   MOBILE MENU BUTTON
+MOBILE MENU BUTTON
 ========================================================= */
 
 .menu-toggle {
-    display: none;
+display: none;
 
-    width: 48px;
-    height: 48px;
 
-    padding: 0;
+width: 48px;
 
-    flex-shrink: 0;
+height: 48px;
 
-    align-items: center;
+padding: 0;
 
-    justify-content: center;
+flex-shrink: 0;
 
-    flex-direction: column;
+align-items: center;
 
-    gap: 5px;
+justify-content: center;
 
-    border: 1px solid rgba(255, 255, 255, 0.13);
+flex-direction: column;
 
-    border-radius: 50%;
+gap: 5px;
 
-    background: #111111;
+border:
+    1px solid rgba(255, 255, 255, 0.13);
 
-    cursor: pointer;
+border-radius: 50%;
+
+background: #111111;
+
+color: #ffffff;
+
+cursor: pointer;
+
+-webkit-tap-highlight-color: transparent;
+
+transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+
+
+}
+
+.menu-toggle:hover {
+background: #181818;
+
+
+border-color:
+    rgba(255, 255, 255, 0.25);
+
+
+}
+
+.menu-toggle:active {
+transform:
+scale(0.94);
+}
+
+.menu-toggle:focus-visible {
+outline:
+2px solid #ffffff;
+
+
+outline-offset:
+    3px;
+
+
 }
 
 .menu-toggle span {
-    display: block;
+display: block;
 
-    width: 19px;
-    height: 2px;
 
-    border-radius: 10px;
+width: 19px;
 
-    background: #ffffff;
+height: 2px;
 
-    transition:
-        transform 0.3s ease,
-        opacity 0.3s ease;
+border-radius: 10px;
+
+background: #ffffff;
+
+transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+
 }
 
-
 /* =========================================================
-   LARGE MONITOR
+LARGE MONITOR
+1600px+
 ========================================================= */
 
 @media (min-width: 1600px) {
 
-    .navbar {
-        width: min(1500px, calc(100% - 100px));
 
-        min-height: 92px;
+.navbar {
+    width:
+        min(1500px, calc(100% - 100px));
 
-        gap: 50px;
-    }
+    min-height: 92px;
 
-    .navbar-logo {
-        font-size: 32px;
-    }
-
-    .navbar-menu {
-        gap: 40px;
-    }
-
-    .nav-link {
-        font-size: 16px;
-    }
-
-    .nav-cta {
-        min-height: 52px;
-
-        padding: 0 25px;
-
-        font-size: 15px;
-    }
+    gap: 50px;
 }
 
 
+.navbar-logo {
+    font-size: 32px;
+}
+
+
+.navbar-menu {
+    gap: 40px;
+}
+
+
+.nav-link {
+    font-size: 16px;
+}
+
+
+.nav-cta {
+    min-height: 52px;
+
+    padding:
+        0 25px;
+
+    font-size: 15px;
+}
+
+
+}
+
 /* =========================================================
-   LAPTOP
+LAPTOP
+951px - 1250px
 ========================================================= */
 
 @media (max-width: 1250px) {
 
-    .navbar {
-        width: min(1180px, calc(100% - 50px));
 
-        gap: 25px;
-    }
+.navbar {
+    width:
+        min(1180px, calc(100% - 50px));
 
-    .navbar-menu {
-        gap: 25px;
-    }
-
-    .nav-link {
-        font-size: 14px;
-    }
-
-    .nav-cta {
-        padding: 0 19px;
-    }
+    gap: 25px;
 }
 
 
+.navbar-menu {
+    gap: 23px;
+}
+
+
+.nav-link {
+    font-size: 14px;
+}
+
+
+.nav-cta {
+    padding:
+        0 18px;
+
+    font-size: 13px;
+}
+
+
+}
+
 /* =========================================================
-   SMALL LAPTOP / TABLET
+SMALL LAPTOP
+769px - 950px
 ========================================================= */
 
 @media (max-width: 950px) {
 
-    .navbar {
-        width: calc(100% - 40px);
 
-        min-height: 78px;
-    }
+.navbar {
+    width:
+        calc(100% - 40px);
 
-    .navbar-logo {
-        font-size: 27px;
-    }
+    min-height: 78px;
 
-    .navbar-menu {
-        gap: 18px;
-    }
-
-    .nav-link {
-        font-size: 13px;
-    }
-
-    .nav-cta {
-        min-height: 46px;
-
-        padding: 0 16px;
-
-        font-size: 13px;
-    }
+    gap: 18px;
 }
 
 
+.navbar-logo {
+    font-size: 27px;
+}
+
+
+.navbar-menu {
+    gap: 14px;
+}
+
+
+.nav-link {
+    font-size: 13px;
+}
+
+
+.nav-cta {
+    min-height: 46px;
+
+    padding:
+        0 14px;
+
+    font-size: 13px;
+}
+
+
+}
+
 /* =========================================================
-   TABLET + MOBILE
+TABLET + MOBILE
+768px AND BELOW
 ========================================================= */
 
 @media (max-width: 768px) {
 
-    .site-header {
-        background: rgba(5, 5, 5, 0.94);
-    }
 
-    .navbar {
-        width: calc(100% - 32px);
-
-        min-height: 72px;
-    }
-
-    .navbar-logo {
-        font-size: 26px;
-    }
-
-
-    /* SHOW MENU BUTTON */
-
-    .menu-toggle {
-        display: flex;
-
-        position: relative;
-
-        z-index: 1002;
-    }
-
-
-    /* MOBILE MENU */
-
-    .navbar-menu {
-        position: fixed;
-
-        top: 82px;
-
-        left: 16px;
-        right: 16px;
-
-        z-index: 1001;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 4px;
-
-        padding: 14px;
-
-        border: 1px solid rgba(255, 255, 255, 0.1);
-
-        border-radius: 20px;
-
-        background: rgba(10, 10, 10, 0.98);
-
-        box-shadow:
-            0 25px 70px rgba(0, 0, 0, 0.65);
-
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-
-        opacity: 0;
-
-        visibility: hidden;
-
-        pointer-events: none;
-
-        transform: translateY(-15px);
-
-        transition:
-            opacity 0.3s ease,
-            visibility 0.3s ease,
-            transform 0.3s ease;
-    }
-
-
-    /* OPEN MENU */
-
-    .navbar-menu.active {
-        opacity: 1;
-
-        visibility: visible;
-
-        pointer-events: auto;
-
-        transform: translateY(0);
-    }
-
-
-    /* MOBILE LINKS */
-
-    .nav-link {
-        width: 100%;
-
-        min-height: 50px;
-
-        padding: 0 15px;
-
-        display: flex;
-
-        align-items: center;
-
-        border-radius: 12px;
-
-        color: #d4d4d8;
-
-        font-size: 15px;
-    }
-
-    .nav-link:hover {
-        background: #151515;
-
-        color: #ffffff;
-
-        transform: none;
-    }
-
-    .nav-link::after {
-        display: none;
-    }
-
-
-    /* MOBILE CTA */
-
-    .nav-cta {
-        width: 100%;
-
-        min-height: 52px;
-
-        margin-top: 8px;
-
-        border-radius: 13px;
-
-        font-size: 14px;
-    }
-
-
-    /* =====================================================
-       HAMBURGER → X
-    ====================================================== */
-
-    .menu-toggle.active span:nth-child(1) {
-        transform:
-            translateY(7px)
-            rotate(45deg);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform:
-            translateY(-7px)
-            rotate(-45deg);
-    }
+.site-header {
+    background:
+        rgba(5, 5, 5, 0.97);
 }
 
 
+.navbar {
+    width:
+        calc(100% - 32px);
+
+    min-height: 72px;
+
+    gap: 12px;
+}
+
+
+/* -----------------------------------------
+   LOGO
+----------------------------------------- */
+
+.navbar-logo {
+    font-size: 26px;
+
+    letter-spacing:
+        -1.5px;
+}
+
+
+/* -----------------------------------------
+   MENU BUTTON
+----------------------------------------- */
+
+.menu-toggle {
+    display: flex;
+
+    position: relative;
+
+    z-index: 1002;
+}
+
+
+/* -----------------------------------------
+   MOBILE MENU
+----------------------------------------- */
+
+.navbar-menu {
+    position: fixed;
+
+    top: 80px;
+
+    left: 16px;
+    right: 16px;
+
+    width: auto;
+
+    max-width:
+        calc(100vw - 32px);
+
+    z-index: 1001;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 4px;
+
+    padding: 14px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 20px;
+
+    background:
+        rgba(10, 10, 10, 0.99);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.65);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translateY(-15px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease;
+
+    overflow: hidden;
+}
+
+
+/* -----------------------------------------
+   OPEN MENU
+----------------------------------------- */
+
+.navbar-menu.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0);
+}
+
+
+/* -----------------------------------------
+   MOBILE NAV LINKS
+----------------------------------------- */
+
+.nav-link {
+    width: 100%;
+
+    min-height: 50px;
+
+    padding:
+        0 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    border-radius: 12px;
+
+    color: #d4d4d8;
+
+    font-size: 15px;
+
+    line-height: 1.2;
+
+    white-space: normal;
+
+    transform: none;
+}
+
+
+.nav-link:hover {
+    background: #151515;
+
+    color: #ffffff;
+
+    transform: none;
+}
+
+
+.nav-link::after {
+    display: none;
+}
+
+
+/* -----------------------------------------
+   MOBILE CTA
+----------------------------------------- */
+
+.nav-cta {
+    width: 100%;
+
+    max-width: 100%;
+
+    min-width: 0;
+
+    min-height: 52px;
+
+    margin-top: 8px;
+
+    padding:
+        0 14px;
+
+    border-radius: 13px;
+
+    font-size: 14px;
+
+    gap: 8px;
+
+    overflow: hidden;
+
+    flex-shrink: 1;
+}
+
+
+.nav-cta-text {
+    min-width: 0;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.nav-cta-arrow {
+    flex-shrink: 0;
+
+    font-size: 18px;
+}
+
+
+.nav-cta:hover {
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* -----------------------------------------
+   HAMBURGER → X
+----------------------------------------- */
+
+.menu-toggle.active span:nth-child(1) {
+    transform:
+        translateY(7px)
+        rotate(45deg);
+}
+
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+
+.menu-toggle.active span:nth-child(3) {
+    transform:
+        translateY(-7px)
+        rotate(-45deg);
+}
+
+
+}
+
 /* =========================================================
-   SMALL MOBILE
+MOBILE
+481px - 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+
+.navbar {
+    width:
+        calc(100% - 28px);
+
+    min-height: 70px;
+}
+
+
+.navbar-logo {
+    font-size: 25px;
+}
+
+
+.navbar-menu {
+    top: 77px;
+
+    left: 14px;
+    right: 14px;
+
+    max-width:
+        calc(100vw - 28px);
+}
+
+
+}
+
+/* =========================================================
+SMALL MOBILE
+480px AND BELOW
 ========================================================= */
 
 @media (max-width: 480px) {
 
-    .navbar {
-        width: calc(100% - 24px);
 
-        min-height: 68px;
-    }
+.navbar {
+    width:
+        calc(100% - 24px);
 
-    .navbar-logo {
-        font-size: 24px;
-    }
-
-    .menu-toggle {
-        width: 44px;
-        height: 44px;
-    }
-
-    .navbar-menu {
-        top: 76px;
-
-        left: 12px;
-        right: 12px;
-
-        padding: 12px;
-
-        border-radius: 18px;
-    }
-
-    .nav-link {
-        min-height: 48px;
-
-        font-size: 14px;
-    }
-
-    .nav-cta {
-        min-height: 50px;
-    }
+    min-height: 68px;
 }
 
 
+.navbar-logo {
+    font-size: 24px;
+}
+
+
+.menu-toggle {
+    width: 44px;
+
+    height: 44px;
+}
+
+
+.navbar-menu {
+    top: 74px;
+
+    left: 12px;
+    right: 12px;
+
+    max-width:
+        calc(100vw - 24px);
+
+    padding: 12px;
+
+    border-radius: 18px;
+}
+
+
+.nav-link {
+    min-height: 48px;
+
+    padding:
+        0 14px;
+
+    font-size: 14px;
+}
+
+
+.nav-cta {
+    min-height: 50px;
+
+    padding:
+        0 13px;
+
+    font-size: 14px;
+}
+
+
+}
+
 /* =========================================================
-   EXTRA SMALL
+EXTRA SMALL
+360px AND BELOW
 ========================================================= */
 
 @media (max-width: 360px) {
 
-    .navbar {
-        width: calc(100% - 20px);
-    }
 
-    .navbar-logo {
-        font-size: 22px;
-    }
+.navbar {
+    width:
+        calc(100% - 20px);
 
-    .menu-toggle {
-        width: 42px;
-        height: 42px;
-    }
+    min-height: 66px;
 }
 
 
+.navbar-logo {
+    font-size: 22px;
+
+    letter-spacing:
+        -1px;
+}
+
+
+.menu-toggle {
+    width: 42px;
+
+    height: 42px;
+}
+
+
+.navbar-menu {
+    top: 72px;
+
+    left: 10px;
+    right: 10px;
+
+    max-width:
+        calc(100vw - 20px);
+
+    padding: 10px;
+}
+
+
+.nav-link {
+    min-height: 46px;
+
+    padding:
+        0 12px;
+
+    font-size: 14px;
+}
+
+
+.nav-cta {
+    min-height: 48px;
+
+    padding:
+        0 12px;
+
+    font-size: 13px;
+}
+
+
+.nav-cta-arrow {
+    font-size: 17px;
+}
+
+
+}
+
 /* =========================================================
-   REDUCED MOTION
+REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
-    .navbar-logo,
-    .nav-link,
-    .nav-cta,
-    .nav-cta span,
-    .menu-toggle span,
-    .navbar-menu {
-        transition: none;
-    }
+
+.navbar-logo,
+.nav-link,
+.nav-cta,
+.nav-cta-arrow,
+.menu-toggle,
+.menu-toggle span,
+.navbar-menu {
+    transition: none;
 }
+
+
+}
+
 
 
 
