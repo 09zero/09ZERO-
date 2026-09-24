@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://09zero.github.io/09ZERO/sitemap.xml
